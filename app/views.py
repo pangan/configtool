@@ -39,9 +39,49 @@ def upload_file():
 
 @app.route('/editor')
 def editor():
-	filedata = []
+	filedata = {}
+	jsondata = None
+
+
+
 	with open(os.path.join(app.config['UPLOAD_FOLDER'],'config.xml')) as f:
-		filedata = f.readlines()
+		for line in f:
+			if "<ems_url>" in line:
+				filedata["ems_url"] = get_tag_value(line)
+			elif "<counter_report_url>" in line:
+				filedata["sup_url"] = get_tag_value(line)
+			elif "<config " in line:
+				filedata["conf_ver"] = get_tag_attr(line,'version')
+
+				
+		
+		#iledata = f.readlines()
+
 
 	
-	return render_template('editor.html', confile=filedata)
+	return render_template('editor.html',
+	 ems_url=filedata["ems_url"],
+	  sup_url=filedata["sup_url"],
+	  conf_ver=filedata["conf_ver"])
+
+def get_tag_value(complete_tag):
+	rec_val = complete_tag.strip()
+	do_copy = True
+	ret_val = ""
+	for ch in rec_val:
+		if ch == "<":
+			do_copy = False
+		elif ch == ">":
+			do_copy = True
+		elif do_copy:
+			ret_val = ret_val + ch
+
+	return ret_val
+
+def get_tag_attr(complete_tag, attr):
+	rec_val = complete_tag.strip()
+	ret_val = rec_val[rec_val.find(attr):]
+	ret_val = ret_val[ret_val.find('"')+1:]
+	ret_val = ret_val[:ret_val.find('"')]
+
+	return ret_val

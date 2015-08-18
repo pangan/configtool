@@ -1,4 +1,14 @@
 <html>
 	<body>
-		<textarea rows=80 cols=120>{{confile}}</textarea>
+		
+		{% if conf_ver%}
+		Config version name: <input type="text" value="{{conf_ver}}" size=20><br>
+		{%endif%}
+		{% if ems_url%}
+		EMS URL: <input type="text" value="{{ems_url}}" size=80><br>
+		{%endif%}
+		{% if sup_url%}
+		SUP URL: <input type="text" value="{{sup_url}}" size=80><br>
+		{%endif%}
+		
 	</body>
