@@ -31,7 +31,7 @@ def upload_file():
 		file = request.files['file']
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
-			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+			file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'temp1.xml'))
 			return redirect(url_for('editor',filename=filename))
 
 	return render_template('upload.html')
@@ -44,15 +44,19 @@ def editor():
 
 
 
-	with open(os.path.join(app.config['UPLOAD_FOLDER'],'config.xml')) as f:
-		for line in f:
-			if "<ems_url>" in line:
-				filedata["ems_url"] = get_tag_value(line)
-			elif "<counter_report_url>" in line:
-				filedata["sup_url"] = get_tag_value(line)
-			elif "<config " in line:
-				filedata["conf_ver"] = get_tag_attr(line,'version')
-
+	try:
+		with open(os.path.join(app.config['UPLOAD_FOLDER'],'temp1.xml')) as f:
+			for line in f:
+				if "<ems_url>" in line:
+					filedata["ems_url"] = get_tag_value(line)
+				elif "<counter_report_url>" in line:
+					filedata["sup_url"] = get_tag_value(line)
+				elif "<config " in line:
+					filedata["conf_ver"] = get_tag_attr(line,'version')
+	except Exception:
+		filedata["ems_url"] = None
+		filedata["sup_url"] = None
+		filedata["conf_ver"] = None
 				
 		
 		#iledata = f.readlines()

@@ -1,8 +1,11 @@
 <html>
+	<head>
+	<link rel="stylesheet" type="text/css" href="/static/style.css">	
+	</head>
 	<body>
-		
+		<a href="/upload">Upload a file</a><br>
 		{% if conf_ver%}
-		Config version name: <input type="text" value="{{conf_ver}}" size=20><br>
+		Config version name: <input type="text" value="{{conf_ver}}" size=20 readonly><br>
 		{%endif%}
 		{% if ems_url%}
 		EMS URL: <input type="text" value="{{ems_url}}" size=80><br>
