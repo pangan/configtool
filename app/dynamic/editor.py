@@ -55,6 +55,7 @@ class Editor():
 					<link rel="stylesheet" type="text/css" href="/static/style.css">	
 				</head>
 				<body>
+					
 					<a href="/upload">Upload a file</a><br>
 					<form method=POST action="savefile">
 					%s
