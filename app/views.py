@@ -9,7 +9,8 @@ import json
 
 UPLOAD_FOLDER = '/opt/configtool/uploads'
 CONFIG_FOLDER = '/opt/configtool/app/static'
-BUILDS_FOLDER = '/opt/configtool/app/builds'
+BUILDS_FOLDER = '/opt/configtool/app/static/builds'
+
 ALLOWED_EXTENSIONS = set(['xml'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -57,8 +58,30 @@ def editor():
 @app.route('/savefile', methods=['GET', 'POST'])	
 def savefile():
 
+	
+	
+	
 	if request.method == 'POST':
-		return render_template('listfiles.html')
-		return request.form['file_name']
-	else:
-		return "nothing!"
+		f = open(os.path.join(BUILDS_FOLDER,request.form['file_name']), 'w')
+		with open(os.path.join(app.config['UPLOAD_FOLDER'],'temp1.xml')) as f_source:
+			for line in f_source:
+				f.write(line)
+		f.close()
+	
+
+	path = os.path.expanduser(BUILDS_FOLDER)
+	return render_template('listfiles.html', tree=make_tree(path))
+
+def make_tree(path):
+    tree = dict(name=os.path.basename(path), children=[])
+    try: lst = os.listdir(path)
+    except OSError:
+        pass #ignore errors
+    else:
+        for name in lst:
+            fn = os.path.join(path, name)
+            if os.path.isdir(fn):
+                tree['children'].append(make_tree(fn))
+            else:
+                tree['children'].append(dict(name=name))
+    return tree
