@@ -17,6 +17,10 @@ body {
 	font-weight: bold;
 }
 
+.tab_item {
+	font-style:italic;
+}
+
 .menuitem {
 	color:blue;
 	font-weight: bold;

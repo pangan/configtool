@@ -15,7 +15,7 @@
 							{% for tab_title in tabs %}
 								<dt class="tab_title">{{tab_title}}
 								{%for items in tabs[tab_title]%}
-									<dd> {{items['title']}}: <input type=text value="{{items['value']}}" size={{items['size']}} name="{{items['name']}}">
+									<dd class="tab_item"> {{items['title']}}: <input type=text value="{{items['value']}}" size={{items['size']}} name="{{items['name']}}">
 								{%endfor%}
 							{%endfor%}
 

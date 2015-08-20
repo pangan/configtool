@@ -1,25 +1,31 @@
 {
-	"header":{
-		"<ems_url>":{
+	"1.ULRs":{
+		"ems_url":{
 			"caption":"EMS URL",
 			"type":"string",
 			"size":80
 		},
-		"<counter_report_url>":{
+		"counter_report_url":{
 			"caption":"SUP URL",
 			"type":"string",
 			"size":80
 		}
 
 	},
-	"trigger":{
-		"<wifi_dialog_trigger>":{
+	"2.Triggers":{
+		"wifi_dialog_trigger":{
 			"caption":"WiFi trigger",
 			"type":"integer",
 			"size":"3"
 		}
 
-
+	},
+	"3.User Interface":{
+		"ap_eula_disabled":{
+			"caption":"ula disabled",
+			"type":"string",
+			"size":10
+		}
 	}
 
 }

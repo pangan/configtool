@@ -73,16 +73,21 @@ def editor():
 
 		new_version = xml_doc['version'][:-6]+time.strftime('%y%m%d')
 		conf_tab2 = [xml_doc['version'],[]]
-		for item in json_conf:
-			tab_dic_title = {item:[]}
-			for tab_item in json_conf[item]:
+		json_conf_sorted = sorted(json_conf.items())
+		for item in json_conf_sorted:
+			tab_dic_title = {item[0]:[]}
+			for tab_item in item[1]:
+				
+
 				if tab_item in xml_doc:
-					item_values = dict(title=json_conf[item][tab_item]['caption'],
+					
+					
+					item_values = dict(title=item[1][tab_item]['caption'],
 					 value = xml_doc[tab_item],
-					  size = json_conf[item][tab_item]['size'] ,
+					  size = item[1][tab_item]['size'] ,
 					   name = tab_item)
 
-					tab_dic_title[item].append(item_values)
+					tab_dic_title[item[0]].append(item_values)
 			conf_tab2[1].append(tab_dic_title)
 
 		return render_template('editor.html', new_version=new_version, conf_tab= conf_tab2)
