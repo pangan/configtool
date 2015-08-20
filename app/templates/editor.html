@@ -1,17 +1,30 @@
 <html>
-	<head>
-	<link rel="stylesheet" type="text/css" href="/static/style.css">	
-	</head>
-	<body>
-		<a href="/upload">Upload a file</a><br>
-		{% if conf_ver%}
-		Config version name: <input type="text" value="{{conf_ver}}" size=20 readonly><br>
-		{%endif%}
-		{% if ems_url%}
-		EMS URL: <input type="text" value="{{ems_url}}" size=80><br>
-		{%endif%}
-		{% if sup_url%}
-		SUP URL: <input type="text" value="{{sup_url}}" size=80><br>
-		{%endif%}
-		<input type=submit value="Save As...">
-	</body>
+				<head>
+					<link rel="stylesheet" type="text/css" href="/static/style.css">	
+				</head>
+				<body>
+					{% include 'header.html'%}
+					<a href="/upload">Upload a file</a><br>
+					<form method=POST action="savefile">
+					<hr>
+					<b>Config File Version </b> : {{conf_tab[0]}} </br>
+
+					<dl>
+
+						{% for tabs in conf_tab[1] %}
+							{% for tab_title in tabs %}
+								<dt><b>{{tab_title}}</b>
+								{%for items in tabs[tab_title]%}
+									<dd> {{items['title']}}: <input type=text value="{{items['value']}}" size={{items['size']}} name="{{items['name']}}">
+								{%endfor%}
+							{%endfor%}
+
+						<dt><b>	{{tab}}</b>
+						{% endfor %}
+					</dl>
+					<input type=submit value="Save As ...">
+					<input type=text value='config_{{new_version}}.xml' name='file_name'>
+					</form>
+
+				</body>
+<html>

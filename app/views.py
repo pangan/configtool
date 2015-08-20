@@ -3,8 +3,9 @@ from flask import render_template, request , redirect, url_for
 from app import app
 from werkzeug import secure_filename
 
-from dynamic import Editor
+from lib import Common
 
+import time
 import json
 
 UPLOAD_FOLDER = '/opt/configtool/uploads'
@@ -13,7 +14,7 @@ BUILDS_FOLDER = '/opt/configtool/app/static/builds'
 
 ALLOWED_EXTENSIONS = set(['xml'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
+lib = Common()
 
 @app.route('/')
 @app.route('/index')
@@ -46,21 +47,44 @@ def upload_file():
 
 @app.route('/editor')
 def editor():
-	filedata = {}
-	ret_html = Editor()
-	jsondata = ""
-	with open(CONFIG_FOLDER+'/config.json') as conf:
-		conf_js = json.load(conf)
 		
-		return ret_html.html(conf_js, os.path.join(app.config['UPLOAD_FOLDER'],'temp1.xml'))
+	with open(CONFIG_FOLDER+'/config.json') as conf:
+		json_conf = json.load(conf)
+		
+		xml_list = []	
+		for item in json_conf:
+			for xml_item in json_conf[item]:
+				xml_list.append(xml_item)
+
+		xml_doc = {}
+		xml_file = os.path.join(app.config['UPLOAD_FOLDER'],'temp1.xml')
+		try:
+			with open(xml_file) as f:
+				for line in f:
+					for xml_tag in xml_list:
+						if xml_tag in line:
+							if lib.get_tag_value(line) != "":
+								xml_doc[xml_tag] = lib.get_tag_value(line)
+						elif "<config " in line:
+							xml_doc['version'] = lib.get_tag_attr(line,'version')
+		except Exception:
+			pass
+
+		new_version = xml_doc['version'][:-6]+time.strftime('%y%m%d')
+		conf_tab2 = [xml_doc['version'],[]]
+		for item in json_conf:
+			tab_dic_title = {item:[]}
+			for tab_item in json_conf[item]:
+				if tab_item in xml_doc:
+					item_values = dict(title=json_conf[item][tab_item]['caption'], value = xml_doc[tab_item], size = json_conf[item][tab_item]['size'] , name = tab_item)
+					tab_dic_title[item].append(item_values)
+			conf_tab2[1].append(tab_dic_title)
+
+		return render_template('editor.html', new_version=new_version, conf_tab= conf_tab2)
 
 
 @app.route('/savefile', methods=['GET', 'POST'])	
 def savefile():
-
-	
-	
-	
 	if request.method == 'POST':
 		f = open(os.path.join(BUILDS_FOLDER,request.form['file_name']), 'w')
 		with open(os.path.join(app.config['UPLOAD_FOLDER'],'temp1.xml')) as f_source:
@@ -70,18 +94,5 @@ def savefile():
 	
 
 	path = os.path.expanduser(BUILDS_FOLDER)
-	return render_template('listfiles.html', tree=make_tree(path))
+	return render_template('listfiles.html', tree=lib.make_tree(path))
 
-def make_tree(path):
-    tree = dict(name=os.path.basename(path), children=[])
-    try: lst = os.listdir(path)
-    except OSError:
-        pass #ignore errors
-    else:
-        for name in lst:
-            fn = os.path.join(path, name)
-            if os.path.isdir(fn):
-                tree['children'].append(make_tree(fn))
-            else:
-                tree['children'].append(dict(name=name))
-    return tree
