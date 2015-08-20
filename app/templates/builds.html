@@ -5,8 +5,7 @@
 </head>
 <body>
 {% include 'header.html'%}
-<a href="/editor">Editor</a>
-<hr>
+
 <h1>{{ tree.name }}</h1>
 <ul>
 {%- for item in tree.children recursive %}

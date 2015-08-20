@@ -38,3 +38,11 @@ class Common():
 	            else:
 	                tree['children'].append(dict(name=name))
 	    return tree
+
+	def update_xml_value(self, orig_xml, new_value):
+		start_ind = orig_xml.find('>')
+		end_ind = orig_xml.find('</')
+		if end_ind > start_ind > -1 :
+			orig_value = orig_xml[start_ind+1:end_ind]
+			return orig_xml.replace(orig_value,new_value)
+		return orig_xml

@@ -4,16 +4,16 @@
 				</head>
 				<body>
 					{% include 'header.html'%}
-					<a href="/upload">Upload a file</a><br>
+					
 					<form method=POST action="savefile">
-					<hr>
+					
 					<b>Config File Version </b> : {{conf_tab[0]}} </br>
 
 					<dl>
 
 						{% for tabs in conf_tab[1] %}
 							{% for tab_title in tabs %}
-								<dt><b>{{tab_title}}</b>
+								<dt class="tab_title">{{tab_title}}
 								{%for items in tabs[tab_title]%}
 									<dd> {{items['title']}}: <input type=text value="{{items['value']}}" size={{items['size']}} name="{{items['name']}}">
 								{%endfor%}
@@ -22,6 +22,7 @@
 						<dt><b>	{{tab}}</b>
 						{% endfor %}
 					</dl>
+					<input type=hidden name="new_version" value="{{new_version}}">
 					<input type=submit value="Save As ...">
 					<input type=text value='config_{{new_version}}.xml' name='file_name'>
 					</form>

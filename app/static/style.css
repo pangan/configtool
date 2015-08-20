@@ -2,3 +2,22 @@ body {
     background-color: lightblue;
     font-family : Arial;
 }
+
+.app_title {
+	font-size: 24px;
+}
+
+.app_description {
+	font-size: 14px;
+	color: gray;
+}
+
+.tab_title {
+	color:red;
+	font-weight: bold;
+}
+
+.menuitem {
+	color:blue;
+	font-weight: bold;
+}
