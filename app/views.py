@@ -49,8 +49,9 @@ def upload_file():
 def editor():
 		
 	with open(CONFIG_FOLDER+'/config.json') as conf:
-		json_conf = json.load(conf)
 		
+		
+		json_conf = json.load(conf)
 		xml_list = []	
 		for item in json_conf:
 			for xml_item in json_conf[item]:
@@ -76,7 +77,11 @@ def editor():
 			tab_dic_title = {item:[]}
 			for tab_item in json_conf[item]:
 				if tab_item in xml_doc:
-					item_values = dict(title=json_conf[item][tab_item]['caption'], value = xml_doc[tab_item], size = json_conf[item][tab_item]['size'] , name = tab_item)
+					item_values = dict(title=json_conf[item][tab_item]['caption'],
+					 value = xml_doc[tab_item],
+					  size = json_conf[item][tab_item]['size'] ,
+					   name = tab_item)
+
 					tab_dic_title[item].append(item_values)
 			conf_tab2[1].append(tab_dic_title)
 
@@ -89,10 +94,24 @@ def savefile():
 		f = open(os.path.join(BUILDS_FOLDER,request.form['file_name']), 'w')
 		with open(os.path.join(app.config['UPLOAD_FOLDER'],'temp1.xml')) as f_source:
 			for line in f_source:
+				if "<config " in line:
+					line = '<config version="%s">' %(request.form['new_version'])
+				dd = ""
+
+				for xml_tag in request.form:
+					if xml_tag in line:
+						line = lib.update_xml_value(line,request.form[xml_tag])
+				
 				f.write(line)
+
 		f.close()
 	
+	return render_template('savefile.html',
+		new_version = request.form['new_version'], file_name = request.form['file_name'])
 
+@app.route('/builds')
+def builds():
 	path = os.path.expanduser(BUILDS_FOLDER)
-	return render_template('listfiles.html', tree=lib.make_tree(path))
+	return render_template('builds.html', tree=lib.make_tree(path))
+
 
