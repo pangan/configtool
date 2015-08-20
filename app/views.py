@@ -19,11 +19,7 @@ lib = Common()
 @app.route('/')
 @app.route('/index')
 def index():
-	#return "Hello, Flask!"
-	pass_param= {'var1':'A'}
-	return render_template('upload.html',
-							title='Home',
-							param=pass_param)
+	return render_template('upload.html')
 
 
 def allowed_file(filename):
@@ -78,9 +74,7 @@ def editor():
 			tab_dic_title = {item[0]:[]}
 			for tab_item in item[1]:
 				
-
 				if tab_item in xml_doc:
-					
 					
 					item_values = dict(title=item[1][tab_item]['caption'],
 					 value = xml_doc[tab_item],

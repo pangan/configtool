@@ -24,7 +24,7 @@
 		"ap_eula_disabled":{
 			"caption":"ula disabled",
 			"type":"string",
-			"size":10
+			"size":20
 		}
 	}
 
