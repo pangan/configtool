@@ -79,7 +79,8 @@ def editor():
 					item_values = dict(title=item[1][tab_item]['caption'],
 					 value = xml_doc[tab_item],
 					  size = item[1][tab_item]['size'] ,
-					   name = tab_item)
+					   name = tab_item,
+					   type = item[1][tab_item]['type'])
 
 					tab_dic_title[item[0]].append(item_values)
 			conf_tab2[1].append(tab_dic_title)
