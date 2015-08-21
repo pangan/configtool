@@ -15,7 +15,17 @@
 							{% for tab_title in tabs %}
 								<dt class="tab_title">{{tab_title}}
 								{%for items in tabs[tab_title]%}
-									<dd class="tab_item"> {{items['title']}}: <input type="{{items['type']}}" value="{{items['value']}}" style="width:{{items['size']}}px" name="{{items['name']}}">
+									<dd class="tab_item"> {{items['title']}}: 
+										{% if items['type'] == "checkbox"%}
+											
+											{% set check_str=""%}
+											{%if items['value'] == '1'%}
+												{%set check_str="checked"%}
+											{%endif%}
+											<input type="hidden" name="{{items['name']}}" value="{{items['value']}}"><input type="checkbox" onclick="this.previousSibling.value=1-this.previousSibling.value" {{check_str}}>
+										{%else%}
+										<input type="{{items['type']}}" value="{{items['value']}}" style="width:{{items['size']}}px" name="{{items['name']}}">
+										{%endif%}
 								{%endfor%}
 							{%endfor%}
 

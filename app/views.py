@@ -75,12 +75,14 @@ def editor():
 			for tab_item in item[1]:
 				
 				if tab_item in xml_doc:
-					
+					item_type = item[1][tab_item]['type']
+					if item_type == "bool":
+						item_type = "checkbox"
 					item_values = dict(title=item[1][tab_item]['caption'],
-					 value = xml_doc[tab_item],
-					  size = item[1][tab_item]['size'] ,
-					   name = tab_item,
-					   type = item[1][tab_item]['type'])
+											 value = xml_doc[tab_item],
+											 size = item[1][tab_item]['size'] ,
+											 name = tab_item,
+											 type = item_type)
 
 					tab_dic_title[item[0]].append(item_values)
 			conf_tab2[1].append(tab_dic_title)
@@ -97,15 +99,18 @@ def savefile():
 				if "<config " in line:
 					line = '<config version="%s">' %(request.form['new_version'])
 				dd = ""
-
+				tt = ""
 				for xml_tag in request.form:
+					
+					tt = tt + " "+ xml_tag + "=" + request.form[xml_tag]
+
 					if xml_tag in line:
 						line = lib.update_xml_value(line,request.form[xml_tag])
 				
 				f.write(line)
 
 		f.close()
-	
+	return tt
 	return render_template('savefile.html',
 		new_version = request.form['new_version'], file_name = request.form['file_name'])
 
