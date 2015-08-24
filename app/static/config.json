@@ -17,8 +17,12 @@
 			"caption":"WiFi trigger",
 			"type":"number",
 			"size":70
+		},
+		"es_disabled":{
+			"caption":"es disabled",
+			"type":"bool",
+			"size":70
 		}
-
 	},
 	"3.User Interface":{
 		"ap_eula_disabled":{
@@ -27,5 +31,6 @@
 			"size":200
 		}
 	}
+
 
 }

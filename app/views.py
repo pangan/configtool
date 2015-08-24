@@ -98,19 +98,15 @@ def savefile():
 			for line in f_source:
 				if "<config " in line:
 					line = '<config version="%s">' %(request.form['new_version'])
-				dd = ""
-				tt = ""
+				
 				for xml_tag in request.form:
-					
-					tt = tt + " "+ xml_tag + "=" + request.form[xml_tag]
-
 					if xml_tag in line:
 						line = lib.update_xml_value(line,request.form[xml_tag])
 				
 				f.write(line)
 
 		f.close()
-	return tt
+	
 	return render_template('savefile.html',
 		new_version = request.form['new_version'], file_name = request.form['file_name'])
 
