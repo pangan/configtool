@@ -33,3 +33,8 @@ body {
 .div_en{
 
 }
+
+.empty_tags{
+	color:red;
+	padding-left: 50px;
+}

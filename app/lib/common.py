@@ -46,3 +46,13 @@ class Common():
 			orig_value = orig_xml[start_ind+1:end_ind]
 			return orig_xml.replace(orig_value,new_value)
 		return orig_xml
+
+	def is_empty_tag(self, tag):
+		
+		if "</" in tag and not ("</config>" in tag) :
+			if self.get_tag_value(tag):
+				return False
+			else:
+				return True
+		
+		return False

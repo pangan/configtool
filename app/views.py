@@ -27,7 +27,6 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
-
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
 	
@@ -49,10 +48,14 @@ def editor():
 		
 		json_conf = json.load(conf)
 		xml_list = []	
+		
 		for item in json_conf:
 			for xml_item in json_conf[item]:
 				xml_list.append(xml_item)
-
+				if 'sub_options' in json_conf[item][xml_item]:
+					for sub_item in json_conf[item][xml_item]['sub_options']:
+						xml_list.append(sub_item)
+		
 		xml_doc = {}
 		xml_file = os.path.join(app.config['UPLOAD_FOLDER'],'temp1.xml')
 		try:
@@ -80,7 +83,7 @@ def editor():
 						
 						for sub_item in item[1][tab_item]['sub_options']:
 							sub_item_values = dict(title=item[1][tab_item]['sub_options'][sub_item]['caption'],
-									 value = xml_doc[tab_item],
+									 value = xml_doc[sub_item],
 									 size = item[1][tab_item]['sub_options'][sub_item]['size'] ,
 									 name = sub_item,
 									 type = item[1][tab_item]['sub_options'][sub_item]['type'])
@@ -108,22 +111,27 @@ def savefile():
 	if request.method == 'POST':
 		f = open(os.path.join(BUILDS_FOLDER,request.form['file_name']), 'w')
 		with open(os.path.join(app.config['UPLOAD_FOLDER'],'temp1.xml')) as f_source:
-			ff = ""
+			empty_tags = []
+			line_number = 0
 			for line in f_source:
+				line_number +=1
 				if "<config " in line:
 					line = '<config version="%s">' %(request.form['new_version'])
-				
+				else:
+					if lib.is_empty_tag(line):
+						empty_tags.append('%s: %s'%(line_number,line))
+
 				for xml_tag in request.form:
 					if xml_tag in line:
 						line = lib.update_xml_value(line,request.form[xml_tag])
-						ff = ff + " "+xml_tag+"="+request.form[xml_tag]
+	
 				
 				f.write(line)
 
 		f.close()
-	return ff
+	
 	return render_template('savefile.html',
-		new_version = request.form['new_version'], file_name = request.form['file_name'])
+		new_version = request.form['new_version'], file_name = request.form['file_name'], empty_tags=empty_tags)
 
 @app.route('/builds')
 def builds():
