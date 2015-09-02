@@ -62,14 +62,14 @@ def editor():
 			with open(xml_file) as f:
 				for line in f:
 					for xml_tag in xml_list:
-						if xml_tag in line:
+						if "<"+xml_tag+">" in line:
 							if lib.get_tag_value(line) != "":
 								xml_doc[xml_tag] = lib.get_tag_value(line)
 						elif "<config " in line:
 							xml_doc['version'] = lib.get_tag_attr(line,'version')
 		except Exception:
 			pass
-
+		
 		new_version = xml_doc['version'][:-6]+time.strftime('%y%m%d')
 		conf_tab2 = [xml_doc['version'],[]]
 		json_conf_sorted = sorted(json_conf.items())
@@ -113,6 +113,7 @@ def savefile():
 		with open(os.path.join(app.config['UPLOAD_FOLDER'],'temp1.xml')) as f_source:
 			empty_tags = []
 			line_number = 0
+
 			for line in f_source:
 				line_number +=1
 				if "<config " in line:
@@ -122,14 +123,11 @@ def savefile():
 						empty_tags.append('%s: %s'%(line_number,line))
 
 				for xml_tag in request.form:
-					if xml_tag in line:
+					if "<"+xml_tag+">" in line:
 						line = lib.update_xml_value(line,request.form[xml_tag])
-	
-				
+					
 				f.write(line)
-
 		f.close()
-	
 	return render_template('savefile.html',
 		new_version = request.form['new_version'], file_name = request.form['file_name'], empty_tags=empty_tags)
 
@@ -137,5 +135,6 @@ def savefile():
 def builds():
 	path = os.path.expanduser(BUILDS_FOLDER)
 	return render_template('builds.html', tree=lib.make_tree(path))
+
 
 

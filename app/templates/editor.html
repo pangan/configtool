@@ -31,6 +31,7 @@
 								<dt class="tab_title">{{tab_title}}
 								{%for items in tabs[tab_title]%}
 									<dd class="tab_item"> {{items['title']}}: 
+										{{make_editor_inputs}}
 										{% if items['type'] == "bool"%}
 											{% set check_str=""%}
 											{%if items['value'] == '1'%}
@@ -48,9 +49,17 @@
 										{%for sub_items in items['sub_item']%}
 										
 											{{sub_items['title']}}:
-											<input type="{{sub_items['type']}}" value="{{sub_items['value']}}" style="width:{{sub_items['size']}}px" name="{{sub_items['name']}}">
-											</br>
-									
+											{%if sub_items['type'] == "bool"%}
+												{% set check_str=""%}
+												{%if sub_items['value'] == '1'%}
+													{%set check_str="checked"%}
+												{%endif%}
+												<input type="hidden" name="{{sub_items['name']}}" value="{{sub_items['value']}}"><input type="checkbox" {{check_str}} id="{{sub_items['name']}}" onchange="this.previousSibling.value=1-this.previousSibling.value;toggleStatus(id)">
+											{%else%}
+												<input type="{{sub_items['type']}}" value="{{sub_items['value']}}" style="width:{{sub_items['size']}}px" name="{{sub_items['name']}}">
+												
+											{%endif%}
+											<br>
 										{%endfor%}
 										</div>
 										<script type="text/javascript">
