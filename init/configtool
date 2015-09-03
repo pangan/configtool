@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# Source function library.
+. /etc/init.d/functions
+
+#exec="/opt/configtool/run.sh"
+exec="gunicorn -c /opt/configtool/gunicorn.ini configtool:app --chdir /opt/configtool"
+prog="configtool"
+
+lockfile=/var/lock/subsys/$prog.pid
+
+start() {
+    echo -n $"Starting $prog... "
+    action `$exec`
+    
+}
+
+stop() {
+    if [ ! -f $lockfile ]
+    then
+        echo "$prog is not running!"
+    else
+        echo -n $"Stopping $prog... (pid `cat $lockfile`)"
+        pid=`cat $lockfile`
+        action `kill -9 $pid`
+        rm -f $lockfile
+        
+    fi
+}
+
+status() {
+
+    #ps -p `cat $lockfile` > /dev/null 2>&1 && echo "$prog is running (pid `cat $lockfile`)" || echo "$prog is not running"
+
+    if [ ! -f $lockfile ]
+    then
+        echo "$prog is not running!"
+    else
+        ps -p `cat $lockfile` > /dev/null 2>&1
+        if [ $? = 1 ] 
+        then
+            echo "$prog is not running."
+        else
+            echo "$prog is running."
+        fi
+    fi
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status
+        ;;
+    restart)
+        stop
+        start
+        ;;
+        
+    *)
+        echo "Usage: <servicename> {start|stop|status|restart"
+        exit 1
+        ;;
+esac
+exit $?
