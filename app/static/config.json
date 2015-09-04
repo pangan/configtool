@@ -141,60 +141,80 @@
       "sub_options":{
       }
     },
+    
 
-
-
-    "restore_wlan_control_after_user_disable":{
-      "caption":"Dropped Wi-Fi Connection Wi-Fi off / restore_wlan_control_after_user_disable",
-      "type": "number",
-      "size": 300
-    },
-    "restore_wlan_control_interval_manual_wifi_on":{
-      "caption":"Dropped Wi-Fi Connection Wi-Fi off / restore_wlan_control_interval_manual_wifi_on",
-      "type": "number",
-      "size": 300
-      },
-    "restore_wlan_control_interval":{
-      "caption":"Dropped Wi-Fi Connection Wi-Fi off / restore_wlan_control_interval",
-      "type": "number",
-      "size": 300
-      },
-    "boingo_proximity_trigger":{
-      "caption":"HotSpot location",
-      "type": "text",
-      "size": 300
-      },
-    "boingo_proximity_trigger":{
-      "caption":"HotSpot location",
-      "type": "text",
-      "size": 300
-      },
-    "boingo_proximity_trigger":{
-      "caption":"HotSpot location",
-      "type": "text",
-      "size": 300
-      },
-    "boingo_proximity_trigger":{
-      "caption":"HotSpot location",
-      "type": "text",
-      "size": 300
-      },
-    "boingo_proximity_trigger":{
-      "caption":"HotSpot location",
-      "type": "text",
-      "size": 300
-      },
-    "boingo_proximity_trigger":{
-      "caption":"HotSpot location",
-      "type": "text",
-      "size": 300
-      },
-    "boingo_proximity_trigger":{
-      "caption":"HotSpot location",
-      "type": "text",
-      "size": 300
+    "DROPPED_WIFI_TITLE":{
+      "caption":"Dropped Wi-Fi Connection Wi-Fi off",
+      "type":"title",
+      "size":0,
+      "sub_options":{
+        "restore_wlan_control_after_user_disable":{
+          "caption":"Dropped Wi-Fi Connection Wi-Fi off / restore_wlan_control_after_user_disable",
+          "type": "number",
+          "size": 50
+        },
+        "restore_wlan_control_interval_manual_wifi_on":{
+          "caption":"Dropped Wi-Fi Connection Wi-Fi off / restore_wlan_control_interval_manual_wifi_on",
+          "type": "number",
+          "size": 50
+          },
+        "restore_wlan_control_interval":{
+          "caption":"Dropped Wi-Fi Connection Wi-Fi off / restore_wlan_control_interval",
+          "type": "number",
+          "size": 50
+          }
       }
+    },
 
+    "WIFI_ROAM_OUT_TITLE":{
+      "caption":"WiFi Roam-out",
+      "type":"title",
+      "size":0,
+      "sub_options":{
+        "roam_out":{
+          "caption":" WiFi Roam-out / HotSpot location",
+          "type": "number",
+          "size": 60
+          },
+        "roam_out_period":{
+          "caption":" WiFi Roam-out / HotSpot location",
+          "type": "text",
+          "size": 60
+          },
+        "roam_out_active_scan_frequency":{
+          "caption":" WiFi Roam-out / HotSpot location",
+          "type": "text",
+          "size": 60
+          },
+        "roam_out_active_scan_timeout":{
+          "caption":" WiFi Roam-out / HotSpot location",
+          "type": "text",
+          "size": 60
+          }
+      }
+    },
+    "NO_INTERNET_CONNECTIVITY_TITLE":{ 
+      "caption":"No internet connectivity",
+      "type":"title",
+      "size":0,
+      "sub_options":{
+        "check_wifi_connection_after_disconnect":{
+          "caption":"No internet connectivity /ss",
+          "type": "text",
+          "size": 60
+          },
+        "check_wifi_connection_frequency":{
+          "caption":"No internet connectivity / ",
+          "type": "text",
+          "size": 60
+          },
+        "check_wifi_connection_frequency_screen_off":{
+          "caption":"No internet connectivity / ",
+          "type": "text",
+          "size": 50
+          }
+      }
+    }
     
    
 

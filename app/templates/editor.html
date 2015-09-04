@@ -28,7 +28,7 @@
 						{%set check_str="checked"%}
 					{%endif-%}
 					<input type="hidden" name="{{items['name']}}" value="{{items['value']}}"><input type="checkbox" {{check_str}} id="{{items['name']}}" onchange="this.previousSibling.value=1-this.previousSibling.value;toggleStatus(id)">
-				{%else%}
+				{%elif items['type'] == "text"%}
 					<input type="{{items['type']}}" value="{{items['value']}}" style="width:{{items['size']}}px" name="{{items['name']}}">
 				{%endif%}
 										
