@@ -1,62 +1,276 @@
 {
-  "1.UI": {
-    "ui_text_color_active": {
-      "caption": "UI Text Color Active",
+  
+
+
+  "1. 10 Min App":{
+    "ABC_Passive":{
+      "caption":"ABC Passive Mode",
+      "type":"bool",
+      "size":0
+      },
+    "ABC_BandwidthFilePhase1":{
+      "caption":"Phase 1 bandwidth",
+      "type": "text",
+      "size": 200
+      },
+    "ABC_BandwidthFilePhase2":{
+      "caption":"Phase 2 bandwidth",
+      "type": "text",
+      "size": 200
+      },
+    "ABC_PeriodicBandwidthTestInS":{
+      "caption":"Test Frequency",
       "type": "number",
       "size": 200
+      },
+    "ABC_InactiveHours":{
+      "caption":"InactiveHours",
+      "type": "text",
+      "size": 200
+      }
+  },
+
+  "2. Wi-Fi Triggers":{
+   "es_disabled":{
+      "caption":"Triggers",
+      "type":"bool",
+      "size":0
     },
-    "disable_network": {
-      "caption": "Disable Network",
+    "interval_scan_times": {
+      "caption": "Interval Scan Times",
       "type": "text",
       "size": 300
-    }
-  },
-  
-  "2.Triggers": {
-    "es_disabled": {
-      "caption": "es disabled",
-      "type": "bool",
-      "size": 0,
-      "sub_options": {
-        "top_right_icon_url": {
-          "caption": "top right icon url",
-          "type": "text",
-          "size": 100
-        },
-        "ui_home_view": {
-          "caption": "ui home view",
-          "type": "text",
-          "size": 200
-        }
-      }
     },
-    "location_enable_attempts": {
-      "caption": "location_enable_attempts",
-      "type": "bool",
-      "size": 0
-    }
-  },
-  "3.AP": {
-    "automatic_ap_page_login":{
-      "caption":"Automatic AP page login",
+    "interval_scan_wake_time": {
+      "caption": "Interval Scan Wake Time",
+      "type": "number",
+      "size": 80
+    },
+    "wifi_check_connection_interval_scan_time": {
+      "caption": "Wifi Check Connection Interval Scan Time",
+      "type": "number",
+      "size": 80
+    },
+    "wifi_cooldown_interval_scan_time": {
+      "caption": "WiFi Cooldown Interval Scan Time",
+      "type": "number",
+      "size": 80
+    
+    },
+    "screen_on_wifi":{
+      "caption":"Screen On Based WiFi",
       "type":"bool",
       "size":0,
       "sub_options":{
-        "automatic_ap_page_login_default": {
-          "caption": "Automatic AP Page Login Default",
-          "type": "bool",
-          "size": 0
-        },
-        "general_ap_roam_in": {
-          "caption": "General AP Roam in",
+        "wifi_check_connection_screen_on": {
+          "caption": "wifi check connection screen on",
           "type": "number",
-          "size": 50
+          "size": 80
+        },
+        "wifi_cooldown_screen_on": {
+          "caption": "wifi cooldown screen on",
+          "type": "number",
+          "size": 80
         }
-        
       }
-      
-    }
+    },
+    "wifi_on_when_ac":{
+      "caption":"AC power connect based Wi-Fi on",
+      "type":"bool",
+      "size":0
+    },
+    "wifi_min_battery":{
+      "caption":"Battery Threshold Wi-Fi off",
+      "type":"number",
+      "size":50
+    },
+    "track_cell_location":{
+      "caption":"Learned Wi-FI on",
+      "type":"bool",
+      "size":0,
+      "sub_options":{
+        "track_cell_location_fail_count": {
+          "caption": "track_cell_location_fail_count",
+          "type": "number",
+          "size": 80
+        },
+        "wifi_cooldown_saved_network": {
+          "caption": "wifi_cooldown_saved_network",
+          "type": "number",
+          "size": 80
+        },
+        "wifi_check_connection_saved_network": {
+          "caption": "wifi_check_connection_saved_network",
+          "type": "number",
+          "size": 80
+        }
+      }
+    },
+    "enable_wifi_wan_low":{
+      "caption":"Learned Wi-FI on",
+      "type":"bool",
+      "size":0,
+      "sub_options":{
+      }
+    },
+    "wifidialogtest":{
+      "caption":"Learned Wi-FI on",
+      "type":"bool",
+      "size":0,
+      "sub_options":{
+      }
+    },
+    "application_trigger_packages":{
+      "caption":"Learned Wi-FI on",
+      "type":"bool",
+      "size":0,
+      "sub_options":{
+      }
+    },
+    "roaming_wifi":{
+      "caption":"Learned Wi-FI on",
+      "type":"bool",
+      "size":0,
+      "sub_options":{
+      }
+    },
+    "stationary_trigger":{
+      "caption":"Learned Wi-FI on",
+      "type":"bool",
+      "size":0,
+      "sub_options":{
+      }
+    },
+
+
+
+    "restore_wlan_control_after_user_disable":{
+      "caption":"Dropped Wi-Fi Connection Wi-Fi off / restore_wlan_control_after_user_disable",
+      "type": "number",
+      "size": 300
+    },
+    "restore_wlan_control_interval_manual_wifi_on":{
+      "caption":"Dropped Wi-Fi Connection Wi-Fi off / restore_wlan_control_interval_manual_wifi_on",
+      "type": "number",
+      "size": 300
+      },
+    "restore_wlan_control_interval":{
+      "caption":"Dropped Wi-Fi Connection Wi-Fi off / restore_wlan_control_interval",
+      "type": "number",
+      "size": 300
+      },
+    "boingo_proximity_trigger":{
+      "caption":"HotSpot location",
+      "type": "text",
+      "size": 300
+      },
+    "boingo_proximity_trigger":{
+      "caption":"HotSpot location",
+      "type": "text",
+      "size": 300
+      },
+    "boingo_proximity_trigger":{
+      "caption":"HotSpot location",
+      "type": "text",
+      "size": 300
+      },
+    "boingo_proximity_trigger":{
+      "caption":"HotSpot location",
+      "type": "text",
+      "size": 300
+      },
+    "boingo_proximity_trigger":{
+      "caption":"HotSpot location",
+      "type": "text",
+      "size": 300
+      },
+    "boingo_proximity_trigger":{
+      "caption":"HotSpot location",
+      "type": "text",
+      "size": 300
+      },
+    "boingo_proximity_trigger":{
+      "caption":"HotSpot location",
+      "type": "text",
+      "size": 300
+      }
+
     
-    
+   
+
+
+  },
+  "3. HotSpot":{
+    "boingo_proximity_trigger":{
+      "caption":"HotSpot location",
+      "type": "text",
+      "size": 300
+      },
+    "boingo_proximity_accuracy_gps":{
+      "caption":"Hotspot Proximity Wi-Fi on accuracy for gps",
+      "type": "number",
+      "size": 50
+      },
+    "boingo_proximity_accuracy":{
+      "caption":"Hotspot Proximity Wi-Fi on accuracy for Google",
+      "type": "number",
+      "size": 50
+      },
+    "boingo_proximity_distance_gps":{
+      "caption":"Hotspot Proximity Wi-Fi on distance for gps",
+      "type": "number",
+      "size": 50
+      },
+    "boingo_proximity_distance":{
+      "caption":"Hotspot Proximity Wi-Fi on distance for Google",
+      "type": "number",
+      "size": 50
+      },
+    "hotspot_stationary_time":{
+      "caption":"Stationary time ",
+      "type": "number",
+      "size": 50
+      }  
+  },
+  "4. Cooldowns":{
+   "restore_wlan_control_after_user_disable":{
+      "caption":"User turn off Wi-Fi radio manually",
+      "type": "number",
+      "size": 100
+      },
+    "restore_wlan_control_interval_manual_wifi_on":{
+      "caption":"User turn on Wi-Fi radio manually",
+      "type": "number",
+      "size": 100
+      }
+  },
+  "5. Misc":{
+    "UiPage":{
+      "caption":"GOOGLE MAP",
+      "type": "text",
+      "size": 300
+      },
+    "notification_bar_icon":{
+      "caption":"NOTIFICATION ICON",
+      "type": "bool",
+      "size": 200
+      },
+    "skip_eula":{
+      "caption":"EULA",
+      "type": "bool",
+      "size": 200
+      },
+    "counter_report_url":{
+      "caption":"SUP URL",
+      "type": "text",
+      "size": 200
+      },
+    "ems_url":{
+      "caption":"EMS URL",
+      "type": "text",
+      "size": 200
+      }
+   
   }
+
 }
