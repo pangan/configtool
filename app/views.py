@@ -63,8 +63,7 @@ def editor():
 				for line in f:
 					for xml_tag in xml_list:
 						if "<"+xml_tag+">" in line:
-							if lib.get_tag_value(line) != "":
-								xml_doc[xml_tag] = lib.get_tag_value(line)
+							xml_doc[xml_tag] = lib.get_tag_value(line)
 						elif "<config " in line:
 							xml_doc['version'] = lib.get_tag_attr(line,'version')
 		except Exception:
