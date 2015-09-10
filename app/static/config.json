@@ -114,19 +114,77 @@
       }
     },
     "wifidialogtest":{
-      "caption":"Learned Wi-FI on",
+      "caption":"Wi-Fi Dialog Wi-Fi on",
       "type":"bool",
       "size":0,
       "sub_options":{
+        "wifidialog_require_stationary":{
+          "caption":"wifidialog require stationary",
+          "type": "number",
+          "size": 50
+        },
+        "wifidialog_ap_interval":{
+          "caption":"wifidialog ap interval",
+          "type": "number",
+          "size": 50
+        },
+        "wifidialog_required_seentimes":{
+          "caption":"wifidialog required seentimes",
+          "type": "number",
+          "size": 50
+        },
+        "wifidialog_ap_delay":{
+          "caption":"wifidialog ap delay",
+          "type": "number",
+          "size": 50
+        },
+        "wifi_dialog_trigger":{
+          "caption":"wifi dialog trigger",
+          "type": "number",
+          "size": 50
+        },
+        "wifi_cooldown_wifi_dialog":{
+          "caption":"wifi cooldown wifi dialog",
+          "type": "number",
+          "size": 50
+        },
+        "wifi_check_connection_wifi_dialog":{
+          "caption":"wifi check connection wifi dialog",
+          "type": "number",
+          "size": 50
+        }
       }
     },
-    "application_trigger_packages":{
-      "caption":"Learned Wi-FI on",
-      "type":"bool",
+
+    "APPLICATION_POWER_LAUNCH_TITLE":{
+      "caption":"Application Power Launch",
+      "type":"title",
       "size":0,
       "sub_options":{
+        "application_trigger_packages":{
+          "caption":"application trigger packages",
+          "type": "text",
+          "size": 350
+        },
+        "application_trigger_frequency":{
+          "caption":"application trigger frequency",
+          "type": "number",
+          "size": 50
+        },
+        "wifi_check_connection_application":{
+          "caption":"wifi check connection application",
+          "type": "number",
+          "size": 50
+        },
+        "wifi_cooldown_application":{
+          "caption":"wifi cooldown application",
+          "type": "number",
+          "size": 50
+        }
+
       }
     },
+
     "roaming_wifi":{
       "caption":"Roaming",
       "type":"bool",
