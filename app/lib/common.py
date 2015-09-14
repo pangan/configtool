@@ -1,4 +1,5 @@
 import os
+
 class Common():
 	def __init__(self):
 		pass
@@ -57,4 +58,12 @@ class Common():
 		
 		return False
 
+	def find_xml_tag(self, jsdata):
+		ret = []
+		for item in jsdata:
+			ret.append(item)
+			if 'sub_options' in jsdata[item]:
+				for xml_tag in self.find_xml_tag(jsdata[item]['sub_options']):
+					ret.append(xml_tag)
+		return ret
 	

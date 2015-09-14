@@ -40,6 +40,7 @@ def upload_file():
 	return render_template('upload.html')
 
 
+
 @app.route('/editor')
 def editor():
 		
@@ -49,13 +50,12 @@ def editor():
 		json_conf = json.load(conf)
 		xml_list = []	
 		
+
 		for item in json_conf:
-			for xml_item in json_conf[item]:
+			for xml_item in lib.find_xml_tag(json_conf[item]):
 				xml_list.append(xml_item)
-				if 'sub_options' in json_conf[item][xml_item]:
-					for sub_item in json_conf[item][xml_item]['sub_options']:
-						xml_list.append(sub_item)
-		
+	
+
 		xml_doc = {}
 		xml_file = os.path.join(app.config['UPLOAD_FOLDER'],'temp1.xml')
 		try:
@@ -68,7 +68,7 @@ def editor():
 							xml_doc['version'] = lib.get_tag_attr(line,'version')
 		except Exception:
 			pass
-		
+		return "ok"
 		new_version = xml_doc['version'][:-6]+time.strftime('%y%m%d')
 		conf_tab2 = [xml_doc['version'],[]]
 		json_conf_sorted = sorted(json_conf.items())
