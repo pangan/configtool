@@ -30,7 +30,7 @@
 						{%set check_str="checked"%}
 					{%endif-%}
 					<input type="hidden" name="{{items['name']}}" value="{{items['value']}}"><input type="checkbox" {{check_str}} id="{{items['name']}}" onchange="this.previousSibling.value=1-this.previousSibling.value;toggleStatus(id)">
-				{%elif items['type'] == "text"%}
+				{%elif items['type'] in ["text","number"] %}
 					<input type="{{items['type']}}" value="{{items['value']}}" style="width:{{items['size']}}px" name="{{items['name']}}">
 				{%endif%}
 										
@@ -44,7 +44,7 @@
 								{%set check_str="checked"%}
 							{%endif-%}
 							<input type="hidden" name="{{sub_items['name']}}" value="{{sub_items['value']}}"><input type="checkbox" {{check_str}} id="{{sub_items['name']}}" onchange="this.previousSibling.value=1-this.previousSibling.value;toggleStatus(id)">
-						{%else%}
+						{%elif sub_items['type'] in ["text", "number"]%}
 							<input type="{{sub_items['type']}}" value="{{sub_items['value']}}" style="width:{{sub_items['size']}}px" name="{{sub_items['name']}}">
 						{%endif%}
 						<br>
