@@ -111,54 +111,11 @@ def builds():
 	path = os.path.expanduser(BUILDS_FOLDER)
 	return render_template('builds.html', tree=lib.make_tree(path))
 
-
-def make_ret_html_for_editor(tab_item):
-	ret_html = ""
-	for items in tab_item:
-		ret_html = ret_html + """
-		<div class='tab_item'> %s:
-		""" %(items["title"])
-
-		if items["type"] == "bool":
-			check_str = ""
-			if items["value"] == '1':
-				check_str = "checked"
-			ret_html = ret_html + """
-			<input type="hidden" name="%s" value="%s"><input type="checkbox" %s id="%s" 
-			onchange="this.previousSibling.value=1-this.previousSibling.value;toggleStatus(id, %s)">
-			""" %(items["name"], items["value"], check_str, items["name"], items["reverce_select"])
-
-		elif items["type"] in ["text", "number"]:
-			ret_html = ret_html + """
-			<input type="%s" value="%s" style="width:%spx" name="%s">
-			""" %(items["type"], items["value"], items["size"], items["name"])
-
-		if items["sub_item"]:
-			
-			ret_html = ret_html + """
-			<div id="%s_div">
-			%s
-			</div>
-			
-			""" %(items["name"] , make_ret_html_for_editor(items["sub_item"]))
-			
-			if items["type"] != "title":
-				ret_html = ret_html + """
-				<script type="text/javascript">
-					toggleStatus("%s", %s);
-				</script>
-				""" %(items["name"], items["reverce_select"])
-
-		ret_html = ret_html + "</div>"
-
-	return ret_html
-
-
 @app.context_processor
 def sub_options():
 	
 	def find_sub_options(items):	
 
-		return Markup(make_ret_html_for_editor(items))
+		return Markup(lib.make_ret_html_for_editor(items))
 
 	return dict(find_sub_options=find_sub_options)
