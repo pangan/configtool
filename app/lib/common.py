@@ -67,3 +67,25 @@ class Common():
 					ret.append(xml_tag)
 		return ret
 	
+	def find_tab_items(self, tabdata, xmldoc):
+		ret = []
+		for item in tabdata:
+			xml_tag_value = ""
+			sub_item = []
+			if "sub_options" in tabdata[item]:
+				for sub_list_item in self.find_tab_items(tabdata[item]["sub_options"], xmldoc):
+					sub_item.append(sub_list_item)
+			
+			if item in xmldoc:
+				xml_tag_value = xmldoc[item]
+
+			ret_item = dict(title=tabdata[item]["caption"],
+				value=xml_tag_value,
+				size=tabdata[item]["size"],
+				name=item,
+				type=tabdata[item]["type"],
+				sub_item=sub_item)
+			
+			ret.append(ret_item)
+
+		return ret

@@ -43,18 +43,13 @@ def upload_file():
 
 @app.route('/editor')
 def editor():
-		
 	with open(CONFIG_FOLDER+'/config.json') as conf:
-		
-		
 		json_conf = json.load(conf)
 		xml_list = []	
-		
 
 		for item in json_conf:
 			for xml_item in lib.find_xml_tag(json_conf[item]):
 				xml_list.append(xml_item)
-	
 
 		xml_doc = {}
 		xml_file = os.path.join(app.config['UPLOAD_FOLDER'],'temp1.xml')
@@ -68,42 +63,16 @@ def editor():
 							xml_doc['version'] = lib.get_tag_attr(line,'version')
 		except Exception:
 			pass
-		return "ok"
+		
 		new_version = xml_doc['version'][:-6]+time.strftime('%y%m%d')
 		conf_tab2 = [xml_doc['version'],[]]
 		json_conf_sorted = sorted(json_conf.items())
+		
 		for item in json_conf_sorted:
 			tab_dic_title = {item[0]:[]}
-			for tab_item in item[1]:
-				
-
-				sub_item_list = []
-				if "sub_options" in item[1][tab_item]:
-					
-					for sub_item in item[1][tab_item]['sub_options']:
-						sub_item_values = dict(title=item[1][tab_item]['sub_options'][sub_item]['caption'],
-								 value = xml_doc[sub_item],
-								 size = item[1][tab_item]['sub_options'][sub_item]['size'] ,
-								 name = sub_item,
-								 type = item[1][tab_item]['sub_options'][sub_item]['type'])
-
-						sub_item_list.append(sub_item_values)
-					
-					
-				xml_tag_value = ""
-				if tab_item in xml_doc:
-					xml_tag_value = xml_doc[tab_item]
-
-				item_values = dict(title=item[1][tab_item]['caption'],
-								 value = xml_tag_value,
-								 size = item[1][tab_item]['size'] ,
-								 name = tab_item,
-								 type = item[1][tab_item]['type'],
-								 sub_item = sub_item_list)
-
-				tab_dic_title[item[0]].append(item_values)
-				
-
+			
+			for tab_item in lib.find_tab_items(item[1], xml_doc):
+				tab_dic_title[item[0]].append(tab_item)
 
 			conf_tab2[1].append(tab_dic_title)
 
