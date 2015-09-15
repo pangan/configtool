@@ -79,12 +79,18 @@ class Common():
 			if item in xmldoc:
 				xml_tag_value = xmldoc[item]
 
+			reverce_select = "false"
+			if "reverce_select" in tabdata[item] and tabdata[item]["reverce_select"]:
+				reverce_select = "true"
+
+
 			ret_item = dict(title=tabdata[item]["caption"],
 				value=xml_tag_value,
 				size=tabdata[item]["size"],
 				name=item,
 				type=tabdata[item]["type"],
-				sub_item=sub_item)
+				sub_item=sub_item,
+				reverce_select=reverce_select)
 			
 			ret.append(ret_item)
 

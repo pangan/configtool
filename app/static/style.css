@@ -19,6 +19,8 @@ body {
 
 .tab_item {
 	font-style:italic;
+	padding-left: 50px;
+	font-weight: normal;
 }
 
 .menuitem {
