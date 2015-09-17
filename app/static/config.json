@@ -32,198 +32,223 @@
 
   "2. Wi-Fi Triggers":{
    "es_disabled":{
-      "caption":"Triggers",
+      "caption":"ES Triggers disabled",
       "type":"bool",
-      "size":0
-    },
-    "TIME_BASED_SCAN_TITLE":{
-      "caption":"Time based Wi-Fi on/off, scan and connect",
-      "type":"title",
       "size":0,
+      "reverce_select":true,
       "sub_options":{
+        "TIME_BASED_SCAN_TITLE":{
+          "caption":"Time based Wi-Fi on/off, scan and connect",
+          "type":"title",
+          "size":0,
+          "sub_options":{
+            "interval_scan_times": {
+              "caption": "Interval Scan Times",
+              "type": "text",
+              "size": 300
+            },
+            "interval_scan_wake_time": {
+              "caption": "Interval Scan Wake Time",
+              "type": "number",
+              "size": 80
+            },
+            "wifi_check_connection_interval_scan_time": {
+              "caption": "Wifi Check Connection Interval Scan Time",
+              "type": "number",
+              "size": 80
+            },
+            "wifi_cooldown_interval_scan_time": {
+              "caption": "WiFi Cooldown Interval Scan Time",
+              "type": "number",
+              "size": 80
+            }
+          }
+        },
+        
+        "SCREEN_ON_BASED_WiFi_TITLE":{
+          "caption":"Screen On Based WiFi on",
+          "type":"title",
+          "size":0,
+          "sub_options":{
+            "screen_on_wifi":{
+            "caption":"Screen On Based WiFi",
+            "type":"bool",
+            "size":0
+            },
+            "wifi_check_connection_screen_on": {
+              "caption": "wifi check connection screen on",
+              "type": "number",
+              "size": 80
+            },
+            "wifi_cooldown_screen_on": {
+              "caption": "wifi cooldown screen on",
+              "type": "number",
+              "size": 80
+            }
+          }
+        },
+        "wifi_on_when_ac":{
+              "caption":"AC power connect based Wi-Fi on",
+              "type":"bool",
+              "size":0
+        },
+        "wifi_min_battery":{
+          "caption":"Battery Threshold Wi-Fi off",
+          "type":"number",
+          "size":50
+        },
 
-        "interval_scan_times": {
-          "caption": "Interval Scan Times",
-          "type": "text",
-          "size": 300
+        "LEARNED_WIFI_ON_TITLE":{
+          "caption":"Learned Wi-FI on",
+          "type":"title",
+          "size":0,
+          "sub_options":{
+            "track_cell_location":{
+              "caption":"track_cell_location",
+              "type":"bool",
+              "size":0
+            },
+            "track_cell_location_fail_count": {
+              "caption": "track_cell_location_fail_count",
+              "type": "number",
+              "size": 80
+            },
+            "wifi_cooldown_saved_network": {
+              "caption": "wifi_cooldown_saved_network",
+              "type": "number",
+              "size": 80
+            },
+            "wifi_check_connection_saved_network": {
+              "caption": "wifi_check_connection_saved_network",
+              "type": "number",
+              "size": 80
+            }
+          }
         },
-        "interval_scan_wake_time": {
-          "caption": "Interval Scan Wake Time",
-          "type": "number",
-          "size": 80
+        
+        "LOW_RSSI_TITLE":{
+          "caption":"Low RSSI Wi-Fi on",
+          "type":"title",
+          "size":0,
+          "sub_options":{
+            "enable_wifi_wan_low":{
+              "caption":"enable_wifi_wan_low",
+              "type": "number",
+              "size": 40
+            },
+            "enable_wifi_wan_db":{
+              "caption":"enable_wifi_wan_db",
+              "type": "number",
+              "size": 40
+            },
+            "enable_wifi_wan_db_lte":{
+              "caption":"enable_wifi_wan_db_lte",
+              "type": "number",
+              "size": 40
+            },
+            "enable_wifi_wan_db_evdo":{
+              "caption":"enable_wifi_wan_db_evdo",
+              "type": "number",
+              "size": 40
+            },
+            "enable_wifi_wan_db_cdma":{
+              "caption":"enable_wifi_wan_db_cdma",
+              "type": "number",
+              "size": 40
+            },
+            "enable_wifi_wan_time":{
+              "caption":"enable_wifi_wan_time",
+              "type": "number",
+              "size": 40
+            },
+            "wifi_check_connection_low_rssi":{
+              "caption":"wifi_check_connection_low_rssi",
+              "type": "number",
+              "size": 40
+            },
+            "wifi_cooldown_low_rssi":{
+              "caption":"wifi_cooldown_low_rssi",
+              "type": "number",
+              "size": 40
+            }
+          }
         },
-        "wifi_check_connection_interval_scan_time": {
-          "caption": "Wifi Check Connection Interval Scan Time",
-          "type": "number",
-          "size": 80
+
+        "WIFI_DIALOG_WIFI_ON_TITLE":{
+          "caption":"Wi-Fi Dialog Wi-Fi on",
+          "type":"title",
+          "size":0,
+          "sub_options":{
+            "wifidialogtest":{
+            "caption":"wifidialigtest",
+            "type":"bool",
+            "size":0
+            },
+            "wifidialog_require_stationary":{
+              "caption":"wifidialog require stationary",
+              "type": "number",
+              "size": 50
+            },
+            "wifidialog_ap_interval":{
+              "caption":"wifidialog ap interval",
+              "type": "number",
+              "size": 50
+            },
+            "wifidialog_required_seentimes":{
+              "caption":"wifidialog required seentimes",
+              "type": "number",
+              "size": 50
+            },
+            "wifidialog_ap_delay":{
+              "caption":"wifidialog ap delay",
+              "type": "number",
+              "size": 50
+            },
+            "wifi_dialog_trigger":{
+              "caption":"wifi dialog trigger",
+              "type": "number",
+              "size": 50
+            },
+            "wifi_cooldown_wifi_dialog":{
+              "caption":"wifi cooldown wifi dialog",
+              "type": "number",
+              "size": 50
+            },
+            "wifi_check_connection_wifi_dialog":{
+              "caption":"wifi check connection wifi dialog",
+              "type": "number",
+              "size": 50
+            }
+          }
         },
-        "wifi_cooldown_interval_scan_time": {
-          "caption": "WiFi Cooldown Interval Scan Time",
-          "type": "number",
-          "size": 80
+
+        "DROPPED_WIFI_TITLE":{
+          "caption":"Dropped Wi-Fi Connection Wi-Fi off",
+          "type":"title",
+          "size":0,
+          "sub_options":{
+            "restore_wlan_control_after_user_disable":{
+              "caption":"restore wlan control after user disable",
+              "type": "number",
+              "size": 50
+            },
+            "restore_wlan_control_interval_manual_wifi_on":{
+              "caption":"restore wlan control interval manual wifi on",
+              "type": "number",
+              "size": 50
+              },
+            "restore_wlan_control_interval":{
+              "caption":"restore wlan control interval",
+              "type": "number",
+              "size": 50
+              }
+          }
         }
-      }
-    },
-
-    "SCREEN_ON_BASED_WiFi_TITLE":{
-      "caption":"Screen On Based WiFi on",
-      "type":"title",
-      "size":0,
-      "sub_options":{
-        "screen_on_wifi":{
-        "caption":"Screen On Based WiFi",
-        "type":"bool",
-        "size":0
-        },
-        "wifi_check_connection_screen_on": {
-          "caption": "wifi check connection screen on",
-          "type": "number",
-          "size": 80
-        },
-        "wifi_cooldown_screen_on": {
-          "caption": "wifi cooldown screen on",
-          "type": "number",
-          "size": 80
-        }
-      }
-    },
-    "wifi_on_when_ac":{
-      "caption":"AC power connect based Wi-Fi on",
-      "type":"bool",
-      "size":0
-    },
-    "wifi_min_battery":{
-      "caption":"Battery Threshold Wi-Fi off",
-      "type":"number",
-      "size":50
-    },
-
-    "LEARNED_WIFI_ON_TITLE":{
-      "caption":"Learned Wi-FI on",
-      "type":"title",
-      "size":0,
-      "sub_options":{
-        "track_cell_location":{
-          "caption":"track_cell_location",
-          "type":"bool",
-          "size":0
-        },
-        "track_cell_location_fail_count": {
-          "caption": "track_cell_location_fail_count",
-          "type": "number",
-          "size": 80
-        },
-        "wifi_cooldown_saved_network": {
-          "caption": "wifi_cooldown_saved_network",
-          "type": "number",
-          "size": 80
-        },
-        "wifi_check_connection_saved_network": {
-          "caption": "wifi_check_connection_saved_network",
-          "type": "number",
-          "size": 80
-        }
-      }
-    },
 
 
-    "LOW_RSSI_TITLE":{
-      "caption":"Low RSSI Wi-Fi on",
-      "type":"title",
-      "size":0,
-      "sub_options":{
-        "enable_wifi_wan_low":{
-          "caption":"enable_wifi_wan_low",
-          "type": "number",
-          "size": 40
-        },
-        "enable_wifi_wan_db":{
-          "caption":"enable_wifi_wan_db",
-          "type": "number",
-          "size": 40
-        },
-        "enable_wifi_wan_db_lte":{
-          "caption":"enable_wifi_wan_db_lte",
-          "type": "number",
-          "size": 40
-        },
-        "enable_wifi_wan_db_evdo":{
-          "caption":"enable_wifi_wan_db_evdo",
-          "type": "number",
-          "size": 40
-        },
-        "enable_wifi_wan_db_cdma":{
-          "caption":"enable_wifi_wan_db_cdma",
-          "type": "number",
-          "size": 40
-        },
-        "enable_wifi_wan_time":{
-          "caption":"enable_wifi_wan_time",
-          "type": "number",
-          "size": 40
-        },
-        "wifi_check_connection_low_rssi":{
-          "caption":"wifi_check_connection_low_rssi",
-          "type": "number",
-          "size": 40
-        },
-        "wifi_cooldown_low_rssi":{
-          "caption":"wifi_cooldown_low_rssi",
-          "type": "number",
-          "size": 40
-        }
-      }
+     } 
     },
     
-
-    "WIFI_DIALOG_WIFI_ON_TITLE":{
-      "caption":"Wi-Fi Dialog Wi-Fi on",
-      "type":"title",
-      "size":0,
-      "sub_options":{
-        "wifidialogtest":{
-        "caption":"wifidialigtest",
-        "type":"bool",
-        "size":0
-        },
-        "wifidialog_require_stationary":{
-          "caption":"wifidialog require stationary",
-          "type": "number",
-          "size": 50
-        },
-        "wifidialog_ap_interval":{
-          "caption":"wifidialog ap interval",
-          "type": "number",
-          "size": 50
-        },
-        "wifidialog_required_seentimes":{
-          "caption":"wifidialog required seentimes",
-          "type": "number",
-          "size": 50
-        },
-        "wifidialog_ap_delay":{
-          "caption":"wifidialog ap delay",
-          "type": "number",
-          "size": 50
-        },
-        "wifi_dialog_trigger":{
-          "caption":"wifi dialog trigger",
-          "type": "number",
-          "size": 50
-        },
-        "wifi_cooldown_wifi_dialog":{
-          "caption":"wifi cooldown wifi dialog",
-          "type": "number",
-          "size": 50
-        },
-        "wifi_check_connection_wifi_dialog":{
-          "caption":"wifi check connection wifi dialog",
-          "type": "number",
-          "size": 50
-        }
-      }
-    },
-
     "APPLICATION_POWER_LAUNCH_TITLE":{
       "caption":"Application Power Launch",
       "type":"title",
@@ -339,32 +364,9 @@
         }
       }
 
-    
     },
     
-
-    "DROPPED_WIFI_TITLE":{
-      "caption":"Dropped Wi-Fi Connection Wi-Fi off",
-      "type":"title",
-      "size":0,
-      "sub_options":{
-        "restore_wlan_control_after_user_disable":{
-          "caption":"restore wlan control after user disable",
-          "type": "number",
-          "size": 50
-        },
-        "restore_wlan_control_interval_manual_wifi_on":{
-          "caption":"restore wlan control interval manual wifi on",
-          "type": "number",
-          "size": 50
-          },
-        "restore_wlan_control_interval":{
-          "caption":"restore wlan control interval",
-          "type": "number",
-          "size": 50
-          }
-      }
-    },
+    
 
     "WIFI_ROAM_OUT_TITLE":{
       "caption":"WiFi Roam-out",
