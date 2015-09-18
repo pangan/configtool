@@ -8,18 +8,48 @@ from lib import Common
 import time
 import json
 
+
 from flask import Markup
+from functools import wraps
 
 UPLOAD_FOLDER = '/opt/configtool/uploads'
-CONFIG_FOLDER = '/opt/configtool/app/static'
+CONFIG_FOLDER = '/opt/configtool/config'
 BUILDS_FOLDER = '/opt/configtool/app/static/builds'
 
 ALLOWED_EXTENSIONS = set(['xml'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 lib = Common()
 
+def check_auth(username, password):
+	logins = dict()
+
+	try:
+		with open(CONFIG_FOLDER+'/logins.json') as json_logins:
+			logins = json.load(json_logins)
+			json_logins.close()
+	except Exception, e:
+		return False
+	
+	if username in logins:
+		return logins[username] == password
+	return False	
+	
+
+def authenticate():
+	return ('Bad Login', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
+
+def requires_auth(f):
+	@wraps(f)
+	def decorated(*args, **kwargs):
+		auth = request.authorization
+		if not auth or not check_auth(auth.username, auth.password):
+			return authenticate()
+		return f(*args, **kwargs)
+	return decorated
+
 @app.route('/')
 @app.route('/index')
+@requires_auth
 def index():
 	return render_template('upload.html')
 
@@ -30,6 +60,7 @@ def allowed_file(filename):
 
 
 @app.route('/upload', methods=['GET', 'POST'])
+@requires_auth
 def upload_file():
 	
 	if request.method == 'POST':
@@ -49,6 +80,7 @@ def upload_file():
 
 
 @app.route('/editor')
+@requires_auth
 def editor():
 	with open(CONFIG_FOLDER+'/config.json') as conf:
 		json_conf = json.load(conf)
@@ -87,6 +119,7 @@ def editor():
 
 
 @app.route('/savefile', methods=['GET', 'POST'])	
+@requires_auth
 def savefile():
 	if request.method == 'POST':
 		f = open(os.path.join(BUILDS_FOLDER,request.form['file_name']), 'w')
@@ -112,6 +145,7 @@ def savefile():
 		new_version = request.form['new_version'], file_name = request.form['file_name'], empty_tags=empty_tags)
 
 @app.route('/builds')
+@requires_auth
 def builds():
 	path = os.path.expanduser(BUILDS_FOLDER)
 	return render_template('builds.html', tree=lib.make_tree(path))
@@ -125,30 +159,11 @@ def sub_options():
 
 	return dict(find_sub_options=find_sub_options)
 
-@app.route('/test')
-def test():
-	#return redirect('editor')
-	ret = request.environ["HTTP_X_CONF_HOST"]
-	for a in request.environ:
-		if a == 'HTTP_X_AMIR':
-			ret = ret + " ,"+a+"="+str(request.environ[a])
-
+@app.route('/ping')
+def ping():
+	ret = "pong..."
 	return ret
-	''' 
-	script_name = environ.get('HTTP_X_SCRIPT_NAME', '')
-	if script_name:
-		return "test2"
-		environ['SCRIPT_NAME'] = script_name
-		path_info = environ['PATH_INFO']
-		if path_info.startswith(script_name):
-			environ['PATH_INFO'] = path_info[len(script_name):]
-	scheme = environ.get('HTTP_X_SCHEME', '')
-	if scheme:
-		environ['wsgi.url_scheme'] = scheme
-	server = environ.get('HTTP_X_FORWARDED_SERVER', '')
-	if server:
-		environ['HTTP_HOST'] = server
-		
-	#return self.app(environ, start_response)
-	return "amir"
-	'''
+	
+@app.route('/logout')
+def logout():
+	return ('Logged out!', 401)
