@@ -37,7 +37,12 @@ def upload_file():
 		if file and allowed_file(file.filename):
 			filename = secure_filename(file.filename)
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'temp1.xml'))
-			return redirect(url_for('editor',filename=filename))
+			_conf_host = ""
+			if "HTTP_X_CONF_HOST" in request.environ:
+				_conf_host = request.environ["HTTP_X_CONF_HOST"]
+			
+			return redirect(_conf_host+url_for('editor',filename=filename))
+			
 
 	return render_template('upload.html')
 
@@ -119,3 +124,31 @@ def sub_options():
 		return Markup(lib.make_ret_html_for_editor(items))
 
 	return dict(find_sub_options=find_sub_options)
+
+@app.route('/test')
+def test():
+	#return redirect('editor')
+	ret = request.environ["HTTP_X_CONF_HOST"]
+	for a in request.environ:
+		if a == 'HTTP_X_AMIR':
+			ret = ret + " ,"+a+"="+str(request.environ[a])
+
+	return ret
+	''' 
+	script_name = environ.get('HTTP_X_SCRIPT_NAME', '')
+	if script_name:
+		return "test2"
+		environ['SCRIPT_NAME'] = script_name
+		path_info = environ['PATH_INFO']
+		if path_info.startswith(script_name):
+			environ['PATH_INFO'] = path_info[len(script_name):]
+	scheme = environ.get('HTTP_X_SCHEME', '')
+	if scheme:
+		environ['wsgi.url_scheme'] = scheme
+	server = environ.get('HTTP_X_FORWARDED_SERVER', '')
+	if server:
+		environ['HTTP_HOST'] = server
+		
+	#return self.app(environ, start_response)
+	return "amir"
+	'''

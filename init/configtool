@@ -9,56 +9,34 @@ prog="configtool"
 
 lockfile=/var/lock/subsys/$prog.pid
 
-start() {
-    echo -n $"Starting $prog... "
+do_start() {
+    echo -n $"Starting $prog ... "
     action `$exec`
     
 }
 
-stop() {
-    if [ ! -f $lockfile ]
-    then
-        echo "$prog is not running!"
-    else
-        echo -n $"Stopping $prog... (pid `cat $lockfile`)"
-        pid=`cat $lockfile`
-        action `kill -9 $pid`
-        rm -f $lockfile
-        
-    fi
+do_stop() {
+    echo "stopping $prog ... `killproc -p $lockfile`"
 }
 
-status() {
-
-    #ps -p `cat $lockfile` > /dev/null 2>&1 && echo "$prog is running (pid `cat $lockfile`)" || echo "$prog is not running"
-
-    if [ ! -f $lockfile ]
-    then
-        echo "$prog is not running!"
-    else
-        ps -p `cat $lockfile` > /dev/null 2>&1
-        if [ $? = 1 ] 
-        then
-            echo "$prog is not running."
-        else
-            echo "$prog is running."
-        fi
-    fi
+get_status() {
+    echo "$prog `status -p $lockfile`"
 }
 
 case "$1" in
     start)
-        start
+        do_start
         ;;
     stop)
-        stop
+        do_stop
         ;;
     status)
-        status
+        get_status
+        
         ;;
     restart)
-        stop
-        start
+        do_stop
+        do_start
         ;;
         
     *)

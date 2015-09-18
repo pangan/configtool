@@ -1,0 +1,4 @@
+*.pyc
+*.xml
+*.bak
+app/static/builds/*

@@ -1,2 +1,3 @@
 # Config Tool
-Flask web application
+
+This is a tool for editing EasySmart XML file.
