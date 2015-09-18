@@ -36,7 +36,8 @@ def check_auth(username, password):
 	
 
 def authenticate():
-	return ('Bad Login', 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
+	return ('Bad Login! you are not allowed to use this system!',
+	 401, {'WWW-Authenticate': 'Basic realm="Login required"'})
 
 def requires_auth(f):
 	@wraps(f)
@@ -166,4 +167,12 @@ def ping():
 	
 @app.route('/logout')
 def logout():
-	return ('Logged out!', 401)
+	return render_template('logout.html'), 401
+
+'''
+Shows this page if invalid address is entered!
+'''
+@app.errorhandler(404)
+@requires_auth
+def page_not_found(e):
+	return render_template('upload.html'), 404

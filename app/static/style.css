@@ -42,3 +42,10 @@ body {
 	color:red;
 	padding-left: 50px;
 }
+
+.logout{
+	color:red;
+	font-size: 20px;
+	font-weight: bold;
+
+}
